@@ -36,7 +36,7 @@ class BaseTestClass(object):
                     candidate()
                     self.__class__.passed += 1
                 except AssertionTestException as ex:
-                    print('{} failed: '.format(method), ex.message)
+                    print('{} failed: '.format(method), ex)
                     self.__class__.fails += 1
 
         fails = self.__class__.fails
