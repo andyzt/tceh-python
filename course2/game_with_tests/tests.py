@@ -47,10 +47,12 @@ class BaseTestClass(object):
 
     def _assert_compare(self, first, second, equality=True):
         if (first == second) != equality:
-            raise AssertionTestException('{}.{}: {} does not equal {}'.format(
+            message = 'does not equal' if equality else 'equals'
+            raise AssertionTestException('{}.{}: {} {} {}'.format(
                     self.__class__.__name__,
                     inspect.stack()[1][3],
                     first,
+                    message,
                     second,
             ))
 
@@ -82,6 +84,10 @@ class TestShuffleField(BaseTestClass):
         result1 = shuffle_field()
         result2 = shuffle_field()
         self.assert_not_equal(result1, result2)
+
+    def test_type(self):
+        result = shuffle_field()
+        self.assert_equal(isinstance(result, list), True)
 
 
 class TestIsGameFinished(BaseTestClass):
